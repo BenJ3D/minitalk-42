@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/02/21 19:00:46 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/02/22 19:04:49 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
-HEADER = ./includes/ft_printf.h
-LIBFT = -C ./libft
+HEADER = ./includes/minitalk.h
+LIBFT = -C ./ft_printf
 
-FILES = ft_printf \
-		print_hexa 
+FILES = server \
+		client 
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
