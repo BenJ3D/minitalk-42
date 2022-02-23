@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/22 19:45:29 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/02/23 23:51:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
 
-// void	sigusr_process()
-
-
-int	main()
+char	*ft_atob(char c)
 {
-	struct sigaction sa;
-	printf("server PID : %d\n", getpid());
-	
+	int	i;
+	int	base;
+	char str[8];
 
-	
-	while (1)
+	base = 128;
+
+	i = 0;
+	printf("%d %d %d\n", c, (c / 128), (c % 128));
+	while (i < 8)
 	{
-		printf("je suis le serveur\n");
-
-		usleep(900000);
+		if((c / base) == 1) // diviser par base qui se divise par 2 a chaque tour
+			str[i++] = 1;
+		else 
+		str[i++] = 0;
+			
 	}
-	return (0);
+	return(str);
+}
+
+
+int main()
+{
+
+	ft_atob('L');
+	return(0);
 }
