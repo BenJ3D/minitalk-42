@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/05 13:36:41 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/18 21:20:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	int	pid;
+	char	*d;
+	char	*s;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	d = (char *)dest;
+	s = (char *)src;
+	if (dest == src)
+		return (dest);
+	if (s < d)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		while (len--)
+			*(d + len) = *(s + len);
+		return (dest);
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	while (len--)
+		*d++ = *s++;
+	return (dest);
 }

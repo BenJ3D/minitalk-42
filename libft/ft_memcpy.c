@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/05 13:36:41 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 15:29:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	pid;
+	size_t		i;
+	const char	*s;
+	char		*d;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	i = 0;
+	d = (void *)dest;
+	s = (const void *)src;
+	if (src == 0 && dest == 0)
+		return (0);
+	while (i < n)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		d[i] = s[i];
+		i++;
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	return (d);
 }

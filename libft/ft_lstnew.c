@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/22 11:43:51 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/22 16:16:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+t_list	*ft_lstnew(void *content)
 {
-	int	pid;
+	t_list	*tmp;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
-	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
-	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	tmp = (t_list *)malloc(sizeof(*tmp));
+	if (!tmp)
+		return (NULL);
+	tmp->content = content;
+	tmp->next = NULL;
+	return (tmp);
 }

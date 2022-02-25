@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/12 22:20:33 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 18:59:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	pid;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
-	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
-	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	if (!s1)
+		return (0);
+	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	return (str);
 }

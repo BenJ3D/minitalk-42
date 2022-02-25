@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/03 17:35:43 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 16:35:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	int	pid;
+	size_t	i;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	if (size == 0)
+		return (ft_strlen(src));
+	i = 0;
+	while (src[i] && i < size - 1)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		dest[i] = src[i];
+		i++;
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	dest[i] = '\0';
+	return (ft_strlen(src));
 }

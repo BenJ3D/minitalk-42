@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/02/24 19:20:21 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/02/25 14:31:32 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,14 @@ OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 
-all : server.out client.out
+all : server client
+	chmod 700 server client
 
-server.out : client.out
-client.out : ${NAME}
-	gcc $(FLAGS) libft/libft.a server.c -o server.out
-	gcc $(FLAGS) libft/libft.a client.c -o client.out
+server : client
+	gcc $(FLAGS) libft/libft.a server.c -o server
+
+client : ${NAME}
+	gcc $(FLAGS) libft/libft.a client.c -o client
 
 .c.o: ${SRCS} $(HEADER)
 	gcc -c ${FLAGS} ${SRCS}
@@ -50,7 +52,7 @@ clean:
 
 fclean: clean
 	${MAKE} fclean $(LIBFT)
-	$(RM) $(NAME)
+	$(RM) $(NAME) server server.out client client.out
 
 re: clean all
 

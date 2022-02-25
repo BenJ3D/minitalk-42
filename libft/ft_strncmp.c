@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/08/10 19:03:07 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 14:39:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	pid;
+	char			*str1;
+	char			*str2;
+	size_t			i;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	i = 0;
+	str1 = (char *)s1;
+	str2 = (char *)s2;
+	if (n == 0)
+		return (0);
+	while ((str1[i] == str2[i]) && (str1[i] || str2[i]) && i < n - 1)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		i++;
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }

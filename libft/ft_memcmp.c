@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/06 16:11:17 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 15:39:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	pid;
+	size_t				i;
+	const unsigned char	*sp1;
+	const unsigned char	*sp2;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	sp1 = (const unsigned char *)s1;
+	sp2 = (const unsigned char *)s2;
+	i = 0;
+	while (i < n)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
-	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
+		if (sp1[i] != sp2[i])
+			return ((int)sp1[i] - (int)sp2[i]);
+		i++;
 	}
 	return (0);
 }

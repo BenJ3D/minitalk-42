@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/02 16:09:35 by falonso           #+#    #+#             */
+/*   Updated: 2021/11/22 16:15:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	pid;
+	t_list	*lst1;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	if (!lst || !f)
+		return ;
+	lst1 = lst;
+	while (lst1)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		f(lst1->content);
+		lst1 = lst1->next;
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
 }

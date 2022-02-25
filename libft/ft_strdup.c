@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/09 16:43:35 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/02/09 19:26:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strdup(const char *s1)
 {
-	int	pid;
+	char	*res;
+	size_t	i;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	i = 0;
+	res = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!res)
+		return (NULL);
+	while (s1[i])
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		res[i] = s1[i];
+		i++;
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	res[i] = 0;
+	return (res);
 }

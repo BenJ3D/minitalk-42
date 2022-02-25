@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 15:05:53 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/03 22:53:31 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/23 16:50:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "libft.h"
+#include <stdio.h>
 
-int	main(int ac, char **av)
-{
-	int	pid;
+char	*ft_strrchr(const char *s, int c)
+{	
+	int	i;
 
-	pid = atoi(av[1]);
-	if (*av[2] == '1')
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
-		printf("sig 1");
-		kill(pid, SIGUSR1); 
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		if (*s == '\0')
+			return (NULL);
+		i--;
 	}
-	if (*av[2] == '2')
-	{
-		printf("sig 2");
-		kill(pid, SIGUSR2);
-	}
-	if (*av[2] == '0')
-	{
-		printf("sig 0");
-		kill(pid, SIGSTOP);
-	}
-	return (0);
+	return (NULL);
 }
