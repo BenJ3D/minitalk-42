@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/24 19:07:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:57:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_atob(char c)
 		return (NULL);
 	base = 128;
 	i = 0;
-	printf("%d %d %d\n", c, (c / 128), (c % 128));
 	while (base >= 1)
 	{
 		if((c / base) == 1)
