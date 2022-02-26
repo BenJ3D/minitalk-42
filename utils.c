@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/26 01:13:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/02/26 02:32:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,31 @@ char	*ft_atob(char c)
 
 int	ft_btoi(char *str)
 {
-	
+	int		i;
+	int		base;
+	char	ichar;
+
+	i = 0;
+	base = 128;
+	while(i < 8)
+	{
+		if (str[i] == '1')
+			ichar += base;
+		base = base / 2;
+		i++;
+	}
+	return (ichar);
 }
 
 // int main(int argc, char **argv)
 // {	
 // 	char *str;
+// 	int		c;
 
 // 	str = ft_atob(argv[1][0]);
-// 	printf("%s", str);
+// 	printf("%s\n", str);
+// 	c = ft_btoi(str);
+// 	printf("%c\n", c);
 // 	free(str);
 // 	return(0);
 // }
