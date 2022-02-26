@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/25 16:57:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/02/26 00:42:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ char	*ft_atob(char c)
 }
 
 
-int main(int argc, char **argv)
-{	
-	char *str;
+// int main(int argc, char **argv)
+// {	
+// 	char *str;
 
-	str = ft_atob(argv[1][0]);
-	printf("%s", str);
-	free(str);
-	return(0);
-}
+// 	str = ft_atob(argv[1][0]);
+// 	printf("%s", str);
+// 	free(str);
+// 	return(0);
+// }
