@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/02/26 03:08:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/01 03:27:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int	main()
 	// 	return(0);
 	tu.i = 0;
 	printf("server PID: %d\n", getpid());
-	
-
+	ft_bzero(tu.str, 7);
 	signal(SIGUSR1, sig_handler1);
 	signal(SIGUSR2, sig_handler2);
 
@@ -63,14 +62,13 @@ int	main()
 		if (tu.progress == FINISH)
 		{
 			
-			printf("%s\n", tu.str);
+			ft_putstr_fd(tu.str, 1);
 			printf("%c\n", ft_btoi(tu.str));
 			tu.progress = NOT_FINISH;
 			tu.i = 0;
 		}
 		//printf("%d\n", tu.bool);
 	}
-	printf("FINISH !!\n");
 	return (0);
 }
 

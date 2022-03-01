@@ -17,10 +17,14 @@ enum	state
 
 typedef struct s_utils
 {
-	int	i;
-	int	bool;
-	char str[8];
-	enum state progress;
+	int		i;
+	int		y;
+	int		size;
+	char	tmpsize[11];
+	int		bool;
+	char	str[8];
+	char	*msg;
+	enum	state progress;
 }	t_utils;
 
 static t_utils	tu;
@@ -29,7 +33,7 @@ char	*ft_atob(char c);
 void	sig_handler1();
 void	sig_handler2();
 void	ft_sendbin(char *str, int pid, int i);
-int		ft_btoi(char *str);
+char	ft_btoi(char *str);
 
 
 #endif
