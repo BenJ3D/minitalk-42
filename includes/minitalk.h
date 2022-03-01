@@ -22,12 +22,13 @@ typedef struct s_utils
 	int		size;
 	char	tmpsize[11];
 	int		bool;
-	char	str[8];
+	char	*str;
 	char	*msg;
+	char	c;
 	enum	state progress;
 }	t_utils;
 
-static t_utils	tu;
+
 
 char	*ft_atob(char c);
 void	sig_handler1();

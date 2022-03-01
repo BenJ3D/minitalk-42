@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/01 03:27:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/01 04:16:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //TODO: --ecrire bin to ascii dans utils!
 //TODO: --envoyer taille str depuis client avec strlen formatter en 10*8 bit
 //TODO: --prevoir envoi du pid client
-
+static t_utils	tu;
 
 void sig_handler1()
 {
@@ -46,13 +46,13 @@ int	main()
 	int		size;
 	
 	i = 0;
-	// size = 40;
-	// tu.str = ft_calloc(sizeof(char), size);
+	size = 9;
+	tu.str = ft_calloc(sizeof(char), size);
 	// if (!tu.str)
 	// 	return(0);
 	tu.i = 0;
 	printf("server PID: %d\n", getpid());
-	ft_bzero(tu.str, 7);
+	//ft_bzero(tu.str, size - 1);
 	signal(SIGUSR1, sig_handler1);
 	signal(SIGUSR2, sig_handler2);
 
@@ -63,7 +63,8 @@ int	main()
 		{
 			
 			ft_putstr_fd(tu.str, 1);
-			printf("%c\n", ft_btoi(tu.str));
+			tu.c = ft_btoi(tu.str);
+			printf("%c\n", tu.c);
 			tu.progress = NOT_FINISH;
 			tu.i = 0;
 		}

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 03:39:19 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/01 04:03:12 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/01 12:27:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ char	ft_btoi2(char *str)
 	return (ichar);
 }
 
-	int main()
+	int main(int ac, char **av)
 	{
 		int		i;
 		int		y;
 		char	*c;
 		char	*tmp;
 
-		tmp = malloc(sizeof(char) * 7);
+		tmp = malloc(sizeof(char) * (ft_strlen(av[1]) + 1));
 		i = 0;
 		y = 0;
 		char	str[] = "coucou";
-		while (str[i])
+		while (av[1][i])
 		{
-			c = ft_atob(str[i++]);
+			c = ft_atob(av[1][i++]);
 			printf("\n%s", c);
 			printf("%c", ft_btoi2(c));
 			tmp[y] = ft_btoi2(c);
