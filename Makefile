@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/02 14:17:18 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/02 17:28:18 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 
 all : server client
-	chmod 700 server client
+	@chmod 700 server client
 
 server : client
 	gcc $(FLAGS) $(SRCS) libft/libft.a server.c -o server

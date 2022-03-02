@@ -6,14 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 14:32:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:46:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
-#include "includes/libft.h"
+// #include "includes/libft.h"
 
-//TODO: --ecrire bin to ascii dans utils!
 //TODO: --envoyer taille str depuis client avec strlen formatter en 10*8 bit
 //TODO: --prevoir envoi du pid client
 
@@ -34,6 +33,7 @@ void sig_handler2()
 {
 	tu.str[tu.i] = '1';
 	tu.i += 1;
+	if (tu.c)
 	if (tu.i == 8)
 		{
 			tu.str[tu.i] = '\0';
@@ -63,9 +63,9 @@ int	main()
 		if (tu.progress == FINISH)
 		{
 			
-			ft_putstr_fd(tu.str, 1);
+			//ft_putstr_fd(tu.str, 1);
 			tu.c = ft_btoi(tu.str);
-			printf("%c\n", tu.c);
+			ft_putchar_fd(tu.c, 1);
 			tu.progress = NOT_FINISH;
 			tu.i = 0;
 		}

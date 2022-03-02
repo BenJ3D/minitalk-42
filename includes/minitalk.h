@@ -12,7 +12,8 @@
 enum	state
 {
 	NOT_FINISH,
-	FINISH
+	FINISH,
+	WAITING
 };
 
 typedef struct s_utils
@@ -24,6 +25,7 @@ typedef struct s_utils
 	int		bool;
 	char	*str;
 	char	*msg;
+	char	*tmp;
 	char	c;
 	enum	state progress;
 }	t_utils;
