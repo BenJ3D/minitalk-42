@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 18:54:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:00:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void	ft_sendbin(char *str, int pid, int i)
 }
 
 /**
- * @brief formate un int en str a 10 chiffres (ex : 0000004242)
- * avant envoi en binaire (!free str!)
- * @param str (adresse *str non maloc )
- * @param len (int a formatter)
+ * @brief formate un int en str a $count chiffres 
+ * (ex int = 4242 count = 10 return str : 0000004242)
+ * (!free str!)
+ * @param size 	l'int a formater en str
+ * @param count 
+ * @return char* 
  */
 char	*ft_imax_to_str(int size, int count)
 {
