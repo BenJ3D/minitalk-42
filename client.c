@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 19:24:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 20:15:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_imax_to_str(int size, int count)
 	free(to.tmp);
 	return(to.str);
 }
-
+//
 int	main(int ac, char **av)
 {
 	int		pidserv;
