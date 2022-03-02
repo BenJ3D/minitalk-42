@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 20:45:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 20:49:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ int	main(int ac, char **av)
 	signal(SIGUSR1, sig_handler1);
 	while(1)
 	{
-		if (tu.bool == 1)
+		sleep(1);
+		//if (tu.bool == 1)
+	printf("Message bien reçu");
 			break;
 	}
 	ft_sendbin("FIN DE MESSAGE", pidserv, 0);
