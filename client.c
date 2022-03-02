@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 20:15:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 20:45:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
 static t_utils	tu;
-
+//TODO: mettrre en pause le client pour ecouter les messages en retour et stopper le process
 void	ft_sendbin(char *str, int pid, int i)
 {
 	char	*tmp;
@@ -67,10 +67,17 @@ char	*ft_imax_to_str(int size, int count)
 	free(to.tmp);
 	return(to.str);
 }
-//
+
+void sig_handler1()
+{
+	printf("Message bien reçu");
+	tu.bool = 1;
+}
+
 int	main(int ac, char **av)
 {
 	int		pidserv;
+	tu.bool = 0;
 
 	pidserv = atoi(av[1]);
 	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
@@ -83,6 +90,12 @@ int	main(int ac, char **av)
 	ft_sendbin("\n", pidserv, 0);
 	ft_sendbin(av[2], pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
+	signal(SIGUSR1, sig_handler1);
+	while(1)
+	{
+		if (tu.bool == 1)
+			break;
+	}
 	ft_sendbin("FIN DE MESSAGE", pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
 	free(tu.str);

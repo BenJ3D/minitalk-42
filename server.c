@@ -6,13 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 20:31:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 20:38:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
 // #include "includes/libft.h"
-
+//TODO: passer la reception de la taille  malloc et du pid client en int
+//TODO: 
 //TODO: --envoyer taille str depuis client avec strlen formatter en 10*8 bit
 //TODO: --prevoir envoi du pid client
 
