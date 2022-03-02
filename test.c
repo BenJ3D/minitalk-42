@@ -18,10 +18,15 @@ void	ft_test()
 
 int main()
 {
-	te.i = 42;
-	te.bool = 0;
-	printf("%i\n", te.i);
-	while(te.i < 4000)
-		ft_test();
+	// te.i = 42;
+	// te.bool = 0;
+	// printf("%i\n", te.i);
+	// while(te.i < 4000)
+	// 	ft_test();
+	int		nb;
+	char	str[]="0000045864";
+	printf("%s\n", str);
+	nb = ft_atoi(str);
+	printf("%i\n", nb);
 	return(0);
 }
