@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 19:00:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:24:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,21 @@ char	*ft_imax_to_str(int size, int count)
 
 int	main(int ac, char **av)
 {
-	int		pid;
-	char	*msgsize;
+	int		pidserv;
 
-	pid = atoi(av[1]);
+	pidserv = atoi(av[1]);
 	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
 	//printf("\nSTR !!! = %s\n", tu.str);
-	ft_sendbin(tu.str, pid, 0);
-	ft_sendbin("\n", pid, 0);
-	ft_sendbin(av[2], pid, 0);
-	ft_sendbin("\n", pid, 0);
-	ft_sendbin("FIN DE MESSAGE", pid, 0);
-	ft_sendbin("\n", pid, 0);
+	ft_sendbin(tu.str, pidserv, 0);
+	ft_sendbin("\n", pidserv, 0);
+	free(tu.str);
+	tu.str = ft_imax_to_str((int)getpid(), 10);
+	ft_sendbin(tu.str, pidserv, 0);
+	ft_sendbin("\n", pidserv, 0);
+	ft_sendbin(av[2], pidserv, 0);
+	ft_sendbin("\n", pidserv, 0);
+	ft_sendbin("FIN DE MESSAGE", pidserv, 0);
+	ft_sendbin("\n", pidserv, 0);
 	free(tu.str);
 	return (0);
 }
