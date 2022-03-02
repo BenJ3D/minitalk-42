@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/01 04:16:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 14:32:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //TODO: --ecrire bin to ascii dans utils!
 //TODO: --envoyer taille str depuis client avec strlen formatter en 10*8 bit
 //TODO: --prevoir envoi du pid client
+
 static t_utils	tu;
 
 void sig_handler1()

@@ -37,4 +37,5 @@ void	ft_sendbin(char *str, int pid, int i);
 char	ft_btoi(char *str);
 
 
+
 #endif

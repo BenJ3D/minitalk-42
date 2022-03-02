@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/02/25 14:31:32 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/02 14:17:18 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ all : server client
 	chmod 700 server client
 
 server : client
-	gcc $(FLAGS) libft/libft.a server.c -o server
+	gcc $(FLAGS) $(SRCS) libft/libft.a server.c -o server
 
 client : ${NAME}
-	gcc $(FLAGS) libft/libft.a client.c -o client
+	gcc $(FLAGS) $(SRCS) libft/libft.a client.c -o client
 
 .c.o: ${SRCS} $(HEADER)
 	gcc -c ${FLAGS} ${SRCS}
