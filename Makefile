@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/02 19:34:15 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/02 19:39:53 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-TMP = $(shell mktemp -d)
+M = gitsave
 
 
 all : server client
@@ -60,7 +60,7 @@ re: clean all
 
 git:
 	git add .
-	git commit -m "gitsave"
+	git commit -m "$(M)"
 	echo hi $(TMP)
 	git push
 
