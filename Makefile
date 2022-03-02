@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/02 19:32:33 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/02 19:33:19 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ re: clean all
 git:
 	git add .
 	git commit -m "gitsave"
+	echo hi
 	git push
 
 .PHONY: all clean fclean re
