@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 17:55:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:54:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,20 @@ void	ft_sendbin(char *str, int pid, int i)
  * @param str (adresse *str non maloc )
  * @param len (int a formatter)
  */
-void	ft_imax_to_str()
+char	*ft_imax_to_str(int size, int count)
 {
-	tu.str = ft_calloc(10, sizeof(char));
-	tu.y = 9;
-	ft_memset(tu.str, '0', 10);
-	tu.tmp = ft_itoa(tu.size);
-	tu.i = ft_strlen(tu.tmp) - 1;
-	 while (tu.i >= 0)
-		tu.str[tu.y--] = tu.tmp[tu.i--];
-	//printf("str = %s \n size = %i", tu.str, tu.size);
-	free(tu.tmp);
+	t_utils	to;
+	
+	to.str = ft_calloc(count, sizeof(char));
+	to.y = count - 1;
+	ft_memset(to.str, '0', count);
+	to.tmp = ft_itoa(size);
+	to.i = ft_strlen(to.tmp) - 1;
+	 while (to.i >= 0)
+		to.str[to.y--] = to.tmp[to.i--];
+	//printf("str = %s \n size = %i", to.str, size);
+	free(to.tmp);
+	return(to.str);
 }
 
 int	main(int ac, char **av)
@@ -68,10 +71,9 @@ int	main(int ac, char **av)
 	int		pid;
 	char	*msgsize;
 
-	tu.size = ft_strlen(av[2]);
 	pid = atoi(av[1]);
-	
-	ft_imax_to_str();
+	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
+	//printf("\nSTR !!! = %s\n", tu.str);
 	ft_sendbin(tu.str, pid, 0);
 	ft_sendbin("\n", pid, 0);
 	ft_sendbin(av[2], pid, 0);
