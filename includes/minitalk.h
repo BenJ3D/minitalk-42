@@ -9,25 +9,34 @@
 # include <stdarg.h>
 # include <signal.h>
 
+enum	bool
+{
+	FALSE,
+	TRUE
+};
+
 enum	state
 {
+	STEP_PARAMETER,
 	NOT_FINISH,
 	FINISH,
-	WAITING
+	BINARY_WAIT,
+	BINARY_OK_FOR_CHAR
 };
 typedef struct s_utils
 {
-	int		i;
-	int		y;
-	int		size;
-	char	tmpsize[11];
-	int		bool;
-	char	*str;
-	char	*msg;
-	char	*tmp;
-	char	c;
-	int		pid;
-	enum	state progress;
+	int			i;
+	int			y;
+	int			size;
+	char		tmpsize[11];
+	int			bool; //doit disparaitre FIXME:
+	enum bool	bool;
+	char		*str;
+	char		*msg;
+	char		*tmp;
+	char		c;
+	int			pid;
+	enum state	progress;
 }	t_utils;
 
 

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 20:38:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/03 12:43:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void sig_handler1()
 	if (tu.i == 8)
 	{
 		tu.str[tu.i] = '\0';
-		tu.progress = FINISH;
 	}
 }
 
@@ -34,14 +33,16 @@ void sig_handler2()
 {
 	tu.str[tu.i] = '1';
 	tu.i += 1;
-	if (tu.c)
 	if (tu.i == 8)
 		{
-			tu.str[tu.i] = '\0';
-			tu.progress = FINISH;
+			tu.str[tu.i] = '\0'; //FIXME: ICI 
 		}
 }
 
+void	receive_first_parameters()
+{
+	
+}
 int	main()
 {
 	int		i;
@@ -50,8 +51,6 @@ int	main()
 	i = 0;
 	size = 9;
 	tu.str = ft_calloc(sizeof(char), size);
-	// if (!tu.str)
-	// 	return(0);
 	tu.i = 0;
 	printf("server PID: %d\n", getpid());
 	//ft_bzero(tu.str, size - 1);
@@ -61,6 +60,8 @@ int	main()
 	while(1)
 	{
 		pause();
+		if (tu.progress == STEP_PARAMETER)
+			receive_first_parameters();
 		if (tu.progress == FINISH)
 		{
 			
