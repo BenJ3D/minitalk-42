@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/03 22:02:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/03 22:41:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,7 @@ void sig_handler(int	signal)
 		//g_tu.progress = FINISH;
 	}
 }
-//
-// void sig_handler2(int signal)
-// {
-// 	ft_putnbr_fd(signal, 1);
-// 	g_tu.str[g_tu.i] = '1';
-// 	g_tu.i += 1;
-// 	if (g_tu.i == 8)
-// 		{
-// 			//g_tu.str[g_tu.i] = '\0'; //FIXME: ICI 
-// 			//g_tu.bin = BINARY_OK_FOR_CHAR;
-// 			g_tu.bin = BINARY_OK_FOR_CHAR;
-// 		}
-// }
+
 // TODO: TODO: TODO:
 void	receive_first_parameters(void)
 {	
@@ -95,12 +83,18 @@ int	main()
 		pause();
 		if (g_tu.bin == BINARY_OK_FOR_CHAR && g_tu.progress == STEP_PARAMETER)
 			receive_first_parameters();
+		if (g_tu.progress == START_RECEIVE_MSG && g_tu.bool == TRUE)
+		{
+			g_tu.msg = ft_calloc(g_tu.size, sizeof(char));
+			g_tu.y = 0;
+			g_tu.bool = FALSE
+		}
 		if (g_tu.progress == START_RECEIVE_MSG && g_tu.bin == BINARY_OK_FOR_CHAR)
 		{
-			
 			//ft_putstr_fd(g_tu.str, 1);
 			g_tu.c = ft_btoi(g_tu.str);
-			ft_putchar_fd(g_tu.c, 1);
+			
+			//ft_putchar_fd(g_tu.c, 1);
 			g_tu.bin = BINARY_WAIT;
 			g_tu.i = 0;
 		}

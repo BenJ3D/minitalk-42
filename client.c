@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/03 21:45:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/03 22:33:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_sendbin(char *str, int pid, int i)
 				kill(pid, SIGUSR1); 
 			if (tmp[j] == '1')
 				kill(pid, SIGUSR2);
-			usleep(100);
+			usleep(200);
 			j++;
 		}
 		i++;
