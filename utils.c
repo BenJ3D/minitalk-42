@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 19:14:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:51:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_atob(char c)
 	return(str);
 }
 
-char	ft_btoi(char *str)
+int	ft_btoi(char *str)
 {
 	int		i;
 	int		base;

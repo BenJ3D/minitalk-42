@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/02 20:49:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:52:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,9 @@ void	ft_sendbin(char *str, int pid, int i)
 	char	*tmp;
 	int		j;
 	
-	//tmp = malloc(sizeof(char) * 9);
-	// if (!tmp)
-	// 	return;
-	//tmp[8] = '\0';
 	i = 0;
 	while (str[i])
 	{
-		// if (str[i] < 0 || str[i] > 127)
-		// 	{tmp = ft_atob('?'); printf("\ntmp debug %s\n", tmp);} //FIXME:
-		// else
 		tmp = ft_atob(str[i]);
 		j = 0;
 		while(tmp[j])
@@ -81,7 +74,6 @@ int	main(int ac, char **av)
 
 	pidserv = atoi(av[1]);
 	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
-	//printf("\nSTR !!! = %s\n", tu.str);
 	ft_sendbin(tu.str, pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
 	free(tu.str);
@@ -94,7 +86,6 @@ int	main(int ac, char **av)
 	while(1)
 	{
 		sleep(1);
-		//if (tu.bool == 1)
 	printf("Message bien reçu");
 			break;
 	}
