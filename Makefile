@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/03 11:46:39 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/03 22:25:36 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ all : $(NAME) server client
 	@chmod 700 server client
 
 server : server.c
-	gcc $(FLAGS) $(OBJS) -Llibft -lft server.c -o server
+	gcc $(FLAGS) $(OBJS)  server.c -Llibft -lft -o server
 
 client : client.c
-	gcc $(FLAGS) $(OBJS) -Llibft -lft client.c -o client
+	gcc $(FLAGS) $(OBJS)  client.c -Llibft -lft -o client
 
 .c.o: ${SRCS} $(HEADER)
 	gcc -c ${FLAGS} ${SRCS}
@@ -55,7 +55,7 @@ fclean: clean
 	${MAKE} fclean $(LIBFT)
 	$(RM) $(NAME) server server.out client client.out
 
-re: clean all
+re: fclean all
 
 git:
 	git add .
