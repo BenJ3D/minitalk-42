@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/03 00:11:56 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/03 00:13:21 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ all : server client
 	chmod 700 server client
 
 server : client
-	gcc $(FLAGS) -Llibft -lft server.c -o server
+	gcc $(FLAGS) -Llibft -lft server.c utils.c -o server
 
 client : ${NAME}
-	gcc $(FLAGS) -Llibft -lft client.c -o client
+	gcc $(FLAGS) -Llibft -lft utils.c -o client
 
 .c.o: ${SRCS} $(HEADER)
 	gcc -c ${FLAGS} ${SRCS}
