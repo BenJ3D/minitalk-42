@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/03 16:52:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/03 21:45:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	main(int ac, char **av)
 {
 	int		pidserv;
 	tu.bool = 0;
-
+	
+	printf("%d\n", getpid());
 	pidserv = atoi(av[1]);
 	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
 	ft_sendbin(tu.str, pidserv, 0);
@@ -87,7 +88,7 @@ int	main(int ac, char **av)
 	{
 		sleep(1);
 	printf("Message bien reçu");
-			break;
+			//break;
 	}
 	ft_sendbin("FIN DE MESSAGE", pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
