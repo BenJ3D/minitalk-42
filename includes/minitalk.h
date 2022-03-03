@@ -12,9 +12,9 @@
 enum	state
 {
 	NOT_FINISH,
-	FINISH
+	FINISH,
+	WAITING
 };
-
 typedef struct s_utils
 {
 	int		i;
@@ -24,7 +24,9 @@ typedef struct s_utils
 	int		bool;
 	char	*str;
 	char	*msg;
+	char	*tmp;
 	char	c;
+	int		pid;
 	enum	state progress;
 }	t_utils;
 
@@ -35,6 +37,5 @@ void	sig_handler1();
 void	sig_handler2();
 void	ft_sendbin(char *str, int pid, int i);
 char	ft_btoi(char *str);
-
 
 #endif

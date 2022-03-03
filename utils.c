@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/01 03:28:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:14:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	ft_btoi(char *str)
 
 	i = 0;
 	base = 128;
-	while(i < 8)
+	while (i < 8)
 	{
 		if (str[i] == '1')
 			ichar += base;
@@ -64,6 +64,8 @@ char	ft_btoi(char *str)
 	}
 	return (ichar);
 }
+
+
 
 // int main(int argc, char **argv)
 // {	

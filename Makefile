@@ -6,7 +6,11 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/03/03 00:13:21 by bducrocq         ###   ########.fr        #
+=======
+#    Updated: 2022/03/02 20:49:57 by bducrocq         ###   ########.fr        #
+>>>>>>> e2f34c26b270cf7d19af5d59395589e770189128
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +31,10 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
+m = git save
 
 all : server client
-	chmod 700 server client
+	@chmod 700 server client
 
 server : client
 	gcc $(FLAGS) -Llibft -lft server.c utils.c -o server
@@ -55,5 +60,10 @@ fclean: clean
 	$(RM) $(NAME) server server.out client client.out
 
 re: clean all
+
+git:
+	git add .
+	git commit -m "$m"
+	git push
 
 .PHONY: all clean fclean re
