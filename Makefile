@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/03/03 00:13:21 by bducrocq         ###   ########.fr        #
-=======
-#    Updated: 2022/03/02 20:49:57 by bducrocq         ###   ########.fr        #
->>>>>>> e2f34c26b270cf7d19af5d59395589e770189128
+#    Updated: 2022/03/03 11:46:39 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +29,14 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 m = git save
 
-all : server client
+all : $(NAME) server client
 	@chmod 700 server client
 
-server : client
-	gcc $(FLAGS) -Llibft -lft server.c utils.c -o server
+server : server.c
+	gcc $(FLAGS) $(OBJS) -Llibft -lft server.c -o server
 
-client : ${NAME}
-	gcc $(FLAGS) -Llibft -lft utils.c -o client
+client : client.c
+	gcc $(FLAGS) $(OBJS) -Llibft -lft client.c -o client
 
 .c.o: ${SRCS} $(HEADER)
 	gcc -c ${FLAGS} ${SRCS}
