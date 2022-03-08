@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/03 22:33:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 12:55:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,24 @@ int	main(int ac, char **av)
 	printf("%d\n", getpid());
 	pidserv = atoi(av[1]);
 	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
-	ft_sendbin(tu.str, pidserv, 0);
-	ft_sendbin("\n", pidserv, 0);
+	ft_sendbin(tu.str, pidserv, 0); // envoi taille message a malloc
+	//ft_sendbin("\n", pidserv, 0);
 	free(tu.str);
 	tu.str = ft_imax_to_str((int)getpid(), 10);
-	ft_sendbin(tu.str, pidserv, 0);
-	ft_sendbin("\n", pidserv, 0);
+	ft_sendbin(tu.str, pidserv, 0); //envoi pid client
+	free(tu.str);
+	//ft_sendbin("\n", pidserv, 0);
 	ft_sendbin(av[2], pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
-	signal(SIGUSR1, sig_handler1);
+	//signal(SIGUSR1, sig_handler1);
 	while(1)
 	{
-		sleep(1);
-	printf("Message bien reçu");
-			//break;
+		sleep(2);
+		printf("Message bien reçu");
+			break;
 	}
-	ft_sendbin("FIN DE MESSAGE", pidserv, 0);
-	ft_sendbin("\n", pidserv, 0);
+	//ft_sendbin("FIN DE MESSAGE", pidserv, 0);
+	//ft_sendbin("\n", pidserv, 0);
 	free(tu.str);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/03 22:41:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:04:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void sig_handler(int	signal)
 	g_tu.i += 1;
 	if (g_tu.i == 8)
 	{
-		//g_tu.str[g_tu.i] = '\0';
+		g_tu.str[g_tu.i] = '\0';
 		g_tu.bin = BINARY_OK_FOR_CHAR;
 		//g_tu.progress = FINISH;
 	}
@@ -55,10 +55,9 @@ void	receive_first_parameters(void)
 	{
 		g_tu.pid = ft_atoi(g_tu.tmpsize);
 		ft_putnbr_fd(g_tu.pid, 1);
-	//	ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', 1);
 		g_tu.progress =  START_RECEIVE_MSG;
 		g_tu.y = 0;
-		
 		return;
 	}
 		g_tu.y++;
@@ -87,14 +86,13 @@ int	main()
 		{
 			g_tu.msg = ft_calloc(g_tu.size, sizeof(char));
 			g_tu.y = 0;
-			g_tu.bool = FALSE
+			g_tu.bool = FALSE;
 		}
 		if (g_tu.progress == START_RECEIVE_MSG && g_tu.bin == BINARY_OK_FOR_CHAR)
 		{
-			//ft_putstr_fd(g_tu.str, 1);
+			//ft_putstr_fd(g_tu.str, 1); // affiche les binaires des chars
 			g_tu.c = ft_btoi(g_tu.str);
-			
-			//ft_putchar_fd(g_tu.c, 1);
+			ft_putchar_fd(g_tu.c, 1); // affiche les char un a un
 			g_tu.bin = BINARY_WAIT;
 			g_tu.i = 0;
 		}
