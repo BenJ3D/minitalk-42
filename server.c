@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 13:04:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:36:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	receive_first_parameters(void)
 	if(g_tu.y == 9 && g_tu.bool == FALSE)
 	{
 		g_tu.size = ft_atoi(g_tu.tmpsize);
-		ft_putnbr_fd(g_tu.size, 1);
-		ft_putchar_fd('\n', 1);
+		// ft_putnbr_fd(g_tu.size, 1);
+		// ft_putchar_fd('\n', 1);
 		g_tu.bool = TRUE;
 		g_tu.y = 0;
 		return;
@@ -54,8 +54,8 @@ void	receive_first_parameters(void)
 	if(g_tu.y == 9 && g_tu.bool == TRUE)
 	{
 		g_tu.pid = ft_atoi(g_tu.tmpsize);
-		ft_putnbr_fd(g_tu.pid, 1);
-		ft_putchar_fd('\n', 1);
+		//ft_putnbr_fd(g_tu.pid, 1);
+		//ft_putchar_fd('\n', 1);
 		g_tu.progress =  START_RECEIVE_MSG;
 		g_tu.y = 0;
 		return;
@@ -95,6 +95,16 @@ int	main()
 			ft_putchar_fd(g_tu.c, 1); // affiche les char un a un
 			g_tu.bin = BINARY_WAIT;
 			g_tu.i = 0;
+			g_tu.y++;
+			ft_putnbr_fd(g_tu.y, 1);
+			if (g_tu.y == g_tu.size)
+			{
+				ft_putstr_fd("SIZE ATTEIND", 1);
+				sleep(2);
+				kill(g_tu.pid, SIGUSR1);
+				g_tu.y = 0;
+				g_tu.progress = STEP_PARAMETER;
+			}
 		}
 		//printf("%d\n", tu.bool);
 	}

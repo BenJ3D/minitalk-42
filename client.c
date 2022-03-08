@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 12:55:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:36:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_sendbin(char *str, int pid, int i)
 	free(tmp);
 }
 
+
 /**
  * @brief formate un int en str a $count chiffres 
  * (ex int = 4242 count = 10 return str : 0000004242)
@@ -63,8 +64,15 @@ char	*ft_imax_to_str(int size, int count)
 
 void sig_handler1()
 {
-	printf("Message bien reçu");
+	ft_putstr_fd("Message bien reçu", 1);
 	tu.bool = 1;
+}
+
+void sig_handler(int	signal)
+{
+	if (signal == SIGUSR1)
+		ft_putstr_fd("Message bien reçu", 1);
+	//kill(getpid(), SIGSTOP);
 }
 
 int	main(int ac, char **av)
@@ -84,12 +92,11 @@ int	main(int ac, char **av)
 	//ft_sendbin("\n", pidserv, 0);
 	ft_sendbin(av[2], pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
-	//signal(SIGUSR1, sig_handler1);
+	signal(SIGUSR1, sig_handler);
+	signal(SIGUSR1, sig_handler1);
 	while(1)
 	{
-		sleep(2);
-		printf("Message bien reçu");
-			break;
+		pause();
 	}
 	//ft_sendbin("FIN DE MESSAGE", pidserv, 0);
 	//ft_sendbin("\n", pidserv, 0);
