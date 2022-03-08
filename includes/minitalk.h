@@ -32,6 +32,7 @@ typedef struct s_utils
 {
 	int				i;
 	int				y;
+	int				x;
 	int				size;
 	char			tmpsize[11];
 	int				ibool; //doit disparaitre FIXME:

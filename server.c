@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 13:36:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:09:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	main()
 	//ft_bzero(g_tu.str, size - 1);
 	signal(SIGUSR1, sig_handler);
 	signal(SIGUSR2, sig_handler);
-
 	while(1)
 	{
 		pause();
@@ -91,19 +90,21 @@ int	main()
 		if (g_tu.progress == START_RECEIVE_MSG && g_tu.bin == BINARY_OK_FOR_CHAR)
 		{
 			//ft_putstr_fd(g_tu.str, 1); // affiche les binaires des chars
-			g_tu.c = ft_btoi(g_tu.str);
-			ft_putchar_fd(g_tu.c, 1); // affiche les char un a un
+			g_tu.c = ft_btoi(g_tu.str); // converti les 8 binaire dans str en int dans g_tu.c
+			//ft_putchar_fd(g_tu.c, 1); // affiche les char un a un FIXME:
+			g_tu.msg[g_tu.y] = g_tu.c;
 			g_tu.bin = BINARY_WAIT;
 			g_tu.i = 0;
 			g_tu.y++;
-			ft_putnbr_fd(g_tu.y, 1);
+			//ft_putnbr_fd(g_tu.y, 1);
 			if (g_tu.y == g_tu.size)
 			{
-				ft_putstr_fd("SIZE ATTEIND", 1);
-				sleep(2);
-				kill(g_tu.pid, SIGUSR1);
-				g_tu.y = 0;
+				ft_putstr_fd(g_tu.msg, 1);
 				g_tu.progress = STEP_PARAMETER;
+				kill(g_tu.pid, SIGUSR1);
+				g_tu.x = 0;
+				g_tu.y = 0;
+				free(g_tu.msg);
 			}
 		}
 		//printf("%d\n", tu.bool);
