@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 17:46:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:23:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_sendbin(char *str, int pid, int i)
 				kill(pid, SIGUSR1); 
 			if (tmp[j] == '1')
 				kill(pid, SIGUSR2);
-			usleep(100);
+			usleep(30);
 			j++;
 		}
 		i++;
@@ -62,13 +62,7 @@ char	*ft_imax_to_str(int size, int count)
 	return(to.str);
 }
 
-void sig_handler1()
-{
-	ft_putstr_fd("Message bien reçu", 1);
-	tu.bool = 1;
-}
-
-void sig_handler(int	signal)
+void sig_handler(int signal)
 {
 	if (signal == SIGUSR1)
 		ft_putstr_fd("Message bien reçu", 1);
@@ -93,7 +87,6 @@ int	main(int ac, char **av)
 	ft_sendbin(av[2], pidserv, 0);
 	ft_sendbin("\n", pidserv, 0);
 	signal(SIGUSR1, sig_handler);
-	signal(SIGUSR1, sig_handler1);
 	while(1)
 	{
 		pause();

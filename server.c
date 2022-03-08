@@ -6,18 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 16:09:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:26:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
 // #include "includes/libft.h"
-//TODO: passer la reception de la taille  malloc et du pid client en int
-//TODO: 
-//TODO: --envoyer taille str depuis client avec strlen formatter en 10*8 bit
-//TODO: --prevoir envoi du pid client
 
-t_utils	g_tu;
+static t_utils	g_tu;
 
 void sig_handler(int	signal)
 {
@@ -99,12 +95,14 @@ int	main()
 			//ft_putnbr_fd(g_tu.y, 1);
 			if (g_tu.y == g_tu.size)
 			{
+				g_tu.msg[g_tu.y] = '\0';
 				ft_putstr_fd(g_tu.msg, 1);
+				free(g_tu.msg);
 				g_tu.progress = STEP_PARAMETER;
+				g_tu.bin = BINARY_WAIT;
 				kill(g_tu.pid, SIGUSR1);
 				g_tu.x = 0;
 				g_tu.y = 0;
-				free(g_tu.msg);
 			}
 		}
 		//printf("%d\n", tu.bool);
