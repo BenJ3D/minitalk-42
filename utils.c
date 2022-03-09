@@ -6,11 +6,32 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/03 15:51:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:23:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
+
+/**
+ * @brief Traite les signals USR1 et 2
+ * 
+ * @param signal 
+ * @param tu adress struct utils principal
+ */
+void sig_handler(int signal, t_utils *tu)
+{
+	if (signal == SIGUSR1)
+		tu->str[tu->i] = '0';
+	if (signal == SIGUSR2)
+		tu->str[tu->i] = '1';
+	tu->i += 1;
+	if (tu->i == 8)
+	{
+		tu->str[tu->i] = '\0';
+		tu->bin = BINARY_OK_FOR_CHAR;
+		//g_tu.progress = FINISH;
+	}
+}
 
 /**
  * @brief pass char to binary
