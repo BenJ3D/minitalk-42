@@ -50,7 +50,7 @@ typedef struct s_utils
 
 char	*ft_atob(char c);
 void	sig_handler(int signal, t_utils *tu);
-void	ft_sendbin(char *str, int pid, int i, int speed);
+void	ft_sendbin(char *str, int pid, int speed);
 int		ft_btoi(char *str);
 
 #endif

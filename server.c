@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/09 19:34:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/09 20:27:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void sig_handler_old(int	signal)
 	}
 }
 
-// TODO: TODO: TODO:
+// TODO: TODO: TODO: suuprimer la variable global
+// TODO: mettre a la norme
 void	receive_first_parameters(void)
 {	
 	g_tu.c = ft_btoi(g_tu.str);
@@ -41,9 +42,9 @@ void	receive_first_parameters(void)
 	if(g_tu.y == 9 && g_tu.bool == FALSE)
 	{
 		g_tu.size = ft_atoi(g_tu.tmpsize);
-		 ft_putchar_fd('\n', 1);
-		 ft_putnbr_fd(g_tu.size, 1); // affiche la taille du message a recevoir
-		 ft_putchar_fd('\n', 1);
+		//  ft_putchar_fd('\n', 1);
+		//  ft_putnbr_fd(g_tu.size, 1); // affiche la taille du message a recevoir
+		//  ft_putchar_fd('\n', 1);
 		g_tu.bool = TRUE;
 		g_tu.y = 0;
 		return;
