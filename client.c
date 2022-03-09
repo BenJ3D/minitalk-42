@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 19:23:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:02:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_sendbin(char *str, int pid, int i)
 				kill(pid, SIGUSR1); 
 			if (tmp[j] == '1')
 				kill(pid, SIGUSR2);
-			usleep(30);
+			usleep(100);
 			j++;
 		}
 		i++;
@@ -37,6 +37,31 @@ void	ft_sendbin(char *str, int pid, int i)
 	free(tmp);
 }
 
+static void	mt_kill(int pid, char *str) //fonction github test decalge bit
+{
+	int		i;
+	char	c;
+
+	while (*str)
+	{
+		i = 8;
+		c = *str++;
+		while (i--)
+		{
+			if (c >> i & 1)
+				kill(pid, SIGUSR2);
+			else
+				kill(pid, SIGUSR1);
+			usleep(50);
+		}
+	}
+	i = 8;
+	while (i--)
+	{
+		kill(pid, SIGUSR1);
+		usleep(100);
+	}
+}
 
 /**
  * @brief formate un int en str a $count chiffres 
@@ -84,8 +109,9 @@ int	main(int ac, char **av)
 	ft_sendbin(tu.str, pidserv, 0); //envoi pid client
 	free(tu.str);
 	//ft_sendbin("\n", pidserv, 0);
-	ft_sendbin(av[2], pidserv, 0);
-	ft_sendbin("\n", pidserv, 0);
+	ft_sendbin(av[2], pidserv, 0); // envoi le message
+	//mt_kill(pidserv, av[2]);
+	//ft_sendbin("\n", pidserv, 0);
 	signal(SIGUSR1, sig_handler);
 	while(1)
 	{

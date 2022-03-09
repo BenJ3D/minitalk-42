@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/09 13:39:45 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/09 18:54:04 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+
+m = $(FOO))
 
 all : $(NAME) server client
 	@chmod 700 server client
@@ -57,7 +59,7 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "$(shell read) >"
+	git commit -m "$m"
 	git push
 
 .PHONY: all clean fclean re
