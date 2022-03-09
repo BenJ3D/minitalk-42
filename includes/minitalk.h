@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 19:13:20 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/03/09 19:13:21 by bducrocq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINITALK_H
 # define MINITALK_H
 
@@ -49,8 +61,7 @@ typedef struct s_utils
 
 
 char	*ft_atob(char c);
-void	sig_handler1();
-void	sig_handler2();
+void	sig_handler(int signal, t_utils *tu);
 void	ft_sendbin(char *str, int pid, int i);
 int		ft_btoi(char *str);
 

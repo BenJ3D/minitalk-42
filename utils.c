@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/09 18:50:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:17:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 void sig_handler(int signal, t_utils *tu)
 {
 	if (signal == SIGUSR1)
-		tu->boolstr[tu->booli] = '0';
+		tu->str[tu->i] = '0';
 	if (signal == SIGUSR2)
-		tu->str[tu.i] = '1';
+		tu->str[tu->i] = '1';
 	tu->i += 1;
 	if (tu->i == 8)
 	{
