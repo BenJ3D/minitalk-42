@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 19:26:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:34:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static t_utils	g_tu;
 
-void sig_handler(int	signal)
+void sig_handler_old(int	signal)
 {
 	if (signal == SIGUSR1)
 		g_tu.str[g_tu.i] = '0';
@@ -41,8 +41,9 @@ void	receive_first_parameters(void)
 	if(g_tu.y == 9 && g_tu.bool == FALSE)
 	{
 		g_tu.size = ft_atoi(g_tu.tmpsize);
-		// ft_putnbr_fd(g_tu.size, 1);
-		// ft_putchar_fd('\n', 1);
+		 ft_putchar_fd('\n', 1);
+		 ft_putnbr_fd(g_tu.size, 1); // affiche la taille du message a recevoir
+		 ft_putchar_fd('\n', 1);
 		g_tu.bool = TRUE;
 		g_tu.y = 0;
 		return;
@@ -50,8 +51,8 @@ void	receive_first_parameters(void)
 	if(g_tu.y == 9 && g_tu.bool == TRUE)
 	{
 		g_tu.pid = ft_atoi(g_tu.tmpsize);
-		//ft_putnbr_fd(g_tu.pid, 1);
-		//ft_putchar_fd('\n', 1);
+		ft_putnbr_fd(g_tu.pid, 1); // affiche le pid client
+		ft_putchar_fd('\n', 1);
 		g_tu.progress =  START_RECEIVE_MSG;
 		g_tu.y = 0;
 		return;
@@ -70,8 +71,8 @@ int	main()
 	g_tu.y = 0;
 	printf("server PID: %d\n", getpid());
 	//ft_bzero(g_tu.str, size - 1);
-	signal(SIGUSR1, sig_handler);
-	signal(SIGUSR2, sig_handler);
+	signal(SIGUSR1, sig_handler_old);
+	signal(SIGUSR2, sig_handler_old);
 	while(1)
 	{
 		pause();

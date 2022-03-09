@@ -49,9 +49,8 @@ typedef struct s_utils
 
 
 char	*ft_atob(char c);
-void	sig_handler1();
-void	sig_handler2();
-void	ft_sendbin(char *str, int pid, int i);
+void	sig_handler(int signal, t_utils *tu);
+void	ft_sendbin(char *str, int pid, int i, int speed);
 int		ft_btoi(char *str);
 
 #endif

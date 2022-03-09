@@ -6,14 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/08 19:23:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:47:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
 static t_utils	tu;
-//TODO: mettrre en pause le client pour ecouter les messages en retour et stopper le process
-void	ft_sendbin(char *str, int pid, int i)
+//TODO: mettre en pause le client pour ecouter les messages en retour et stopper le process
+void	ft_sendbin(char *str, int pid, int i, int speed)
 {
 	char	*tmp;
 	int		j;
@@ -29,7 +29,7 @@ void	ft_sendbin(char *str, int pid, int i)
 				kill(pid, SIGUSR1); 
 			if (tmp[j] == '1')
 				kill(pid, SIGUSR2);
-			usleep(30);
+			usleep(speed);
 			j++;
 		}
 		i++;
@@ -62,11 +62,13 @@ char	*ft_imax_to_str(int size, int count)
 	return(to.str);
 }
 
-void sig_handler(int signal)
+void sig_handler1(int signal)
 {
 	if (signal == SIGUSR1)
+	{
 		ft_putstr_fd("Message bien reçu", 1);
-	//kill(getpid(), SIGSTOP);
+		kill(getpid(), SIGKILL);
+	}
 }
 
 int	main(int ac, char **av)
@@ -77,16 +79,16 @@ int	main(int ac, char **av)
 	printf("%d\n", getpid());
 	pidserv = atoi(av[1]);
 	tu.str = ft_imax_to_str(ft_strlen(av[2]), 10);
-	ft_sendbin(tu.str, pidserv, 0); // envoi taille message a malloc
+	ft_sendbin(tu.str, pidserv, 0, 300); // envoi taille message a malloc
 	//ft_sendbin("\n", pidserv, 0);
 	free(tu.str);
 	tu.str = ft_imax_to_str((int)getpid(), 10);
-	ft_sendbin(tu.str, pidserv, 0); //envoi pid client
+	ft_sendbin(tu.str, pidserv, 0, 300); //envoi pid client
 	free(tu.str);
 	//ft_sendbin("\n", pidserv, 0);
-	ft_sendbin(av[2], pidserv, 0);
-	ft_sendbin("\n", pidserv, 0);
-	signal(SIGUSR1, sig_handler);
+	ft_sendbin(av[2], pidserv, 0, 50); //envoi du message
+	//ft_sendbin("\n", pidserv, 0);
+	signal(SIGUSR1, sig_handler1);
 	while(1)
 	{
 		pause();
