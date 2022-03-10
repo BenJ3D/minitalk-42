@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   servertest.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/10 15:18:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/10 17:05:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,6 @@
 
 static t_utils	tu;
 
-void sig_handler_old(int signal)
-{
-	if (signal == SIGUSR1)
-		tu.str[tu.i] = '0';
-	if (signal == SIGUSR2)
-		tu.str[tu.i] = '1';
-	tu.i += 1;
-	if (tu.i == 8)
-	{
-		tu.str[tu.i] = '\0';
-		tu.bin = BINARY_OK_FOR_CHAR;
-		//tu.progress = FINISH;
-	}
-}
-
-// TODO: TODO: TODO: suuprimer la variable global
-// TODO: mettre a la norme
 void	receive_first_parameters(void)
 {	
 	tu.c = ft_btoi(tu.str);
@@ -60,54 +43,60 @@ void	receive_first_parameters(void)
 	}
 		tu.y++;
 }
+
+void sig_handler_old(int signal, void *ptr)
+{
+	t_utils	*ptr2;
+
+	ptr2 = &*ptr;
+
+	ptr2->ibool = 13;
+	if (signal == SIGUSR1)
+	{
+		ft_putstr_fd("\n0\n", 1);
+	}
+	if (signal == SIGUSR2)
+	{
+		ft_putstr_fd("\n1\n", 1);
+	}
+	tu.i += 1;
+	ft_putnbr_fd(tu.i, 1);
+	if (tu.i == 8)
+	{
+	ft_putstr_fd("\n8!\n", 1);
+	tu.i = 0;
+		//tu.progress = FINISH;
+	}
+}
+//
+
 int	main()
 {
-	int		i;
-	int		size;
+
+	t_utils	ts;
+	t_utils	*ptr;
 	
-	size = 9;
-	tu.str = ft_calloc(sizeof(char), size);
-	tu.progress = STEP_PARAMETER;
+	tu.ibool = 4242;
+	ptr = &tu;
+	ptr->i = 13;
+	printf("ptr.i = %d\n", ptr->i);
+	ptr->i = 42;
+	printf("ptr.i = %d\n", ptr->i);
+	printf("ptr.ibool1 = %d\n", ptr->ibool);
+	int	i;
 	tu.i = 0;
 	tu.y = 0;
 	printf("server PID: %d\n", getpid());
 	//ft_bzero(tu.str, size - 1);
-	signal(SIGUSR1, sig_handler_old);
-	signal(SIGUSR2, sig_handler_old);
+	signal(SIGUSR1, (void (*)(int))sig_handler_old);
+	signal(SIGUSR2, (void (*)(int))sig_handler_old);
+	sig_handler_old(SIGUSR1, ptr);
+	ptr->i = 101;
+	printf("ptr.ibool1 = %d\n", ptr->ibool);
+
 	while(1)
 	{
 		pause();
-		if (tu.bin == BINARY_OK_FOR_CHAR && tu.progress == STEP_PARAMETER)
-			receive_first_parameters();
-		if (tu.progress == START_RECEIVE_MSG && tu.bool == TRUE)
-		{
-			tu.msg = ft_calloc(tu.size, sizeof(char));
-			tu.y = 0;
-			tu.bool = FALSE;
-		}
-		if (tu.progress == START_RECEIVE_MSG && tu.bin == BINARY_OK_FOR_CHAR)
-		{
-			//ft_putstr_fd(tu.str, 1); // affiche les binaires des chars
-			tu.c = ft_btoi(tu.str); // converti les 8 binaire dans str en int dans tu.c
-			//ft_putchar_fd(tu.c, 1); // affiche les char un a un FIXME:
-			tu.msg[tu.y] = tu.c;
-			tu.bin = BINARY_WAIT;
-			tu.i = 0;
-			tu.y++;
-			//ft_putnbr_fd(tu.y, 1);
-			if (tu.y == tu.size)
-			{
-				tu.msg[tu.y] = '\0';
-				ft_putstr_fd(tu.msg, 1);
-				free(tu.msg);
-				tu.progress = STEP_PARAMETER;
-				tu.bin = BINARY_WAIT;
-				kill(tu.pid, SIGUSR1);
-				tu.x = 0;
-				tu.y = 0;
-			}
-		}
-		//printf("%d\n", tu.bool);
 	}
 	return (0);
 }

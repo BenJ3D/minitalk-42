@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/09 20:26:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/10 16:12:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_sendbin(char *str, int pid, int speed)
 	}
 	free(tmp);
 }
-
 
 /**
  * @brief formate un int en str a $count chiffres 
@@ -89,7 +88,7 @@ int	main(int ac, char **av)
 	ft_sendbin(tu.str, pidserv, 400); //envoi pid client
 	free(tu.str);
 	//ft_sendbin("\n", pidserv, 0);
-	ft_sendbin(av[2], pidserv, 60); //envoi du message
+	ft_sendbin(av[2], pidserv, 80); //envoi du message
 	//ft_sendbin("\n", pidserv, 0);
 	signal(SIGUSR1, sig_handler1);
 	while(1)
