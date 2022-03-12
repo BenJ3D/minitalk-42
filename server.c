@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 16:14:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:15:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void sig_handler_old(int signal)
 	}
 }
 
-// TODO: TODO: TODO: suuprimer la variable global
+// TODO: TODO: suuprimer la variable global
 // TODO: mettre a la norme
 void	receive_first_parameters(void)
 {	
