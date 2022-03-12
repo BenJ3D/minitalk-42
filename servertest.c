@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 16:02:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 17:53:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	receive_first_parameters(void)
 		tu.pid = ft_atoi(tu.tmpsize);
 		ft_putnbr_fd(tu.pid, 1); // affiche le pid client
 		ft_putchar_fd('\n', 1);
-		tu.progress =  START_RECEIVE_MSG;
+		tu.progress =  GO_RECEIVE_MSG;
 		tu.y = 0;
 		return;
 	}

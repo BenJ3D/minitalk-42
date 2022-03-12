@@ -62,7 +62,7 @@ typedef struct s_tools
 	char			tmpsize[11];
 	int				ibool; //doit disparaitre FIXME:
 	enum e_bool		bool;
-//	char			*str;
+	char			*str;
 	char			*msg;
 	char			*tmp;
 	char			c;

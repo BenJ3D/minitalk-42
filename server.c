@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 16:48:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:01:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	receive_first_parameters(t_tools *ptls)
 	{
 		ptls->size = ft_atoi(ptls->tmpsize);
 		 ft_putchar_fd('\n', 1);
-		 ft_putnbr_fd(ptls->size, 1); // affiche la taille du message a recevoir
+		 ft_putnbr_fd(ptls->size, 1); // FIXME: affiche la taille du message a recevoir
 		 ft_putchar_fd('\n', 1);
 		ptls->bool = TRUE;
 		ptls->y = 0;
@@ -106,7 +106,6 @@ int	main()
 				ptls->y = 0;
 			}
 		}
-		//printf("%d\n", ptls->bool);
 	}
 	return (0);
 }

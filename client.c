@@ -6,12 +6,12 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/10 16:12:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 17:37:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
-static t_utils	tu;
+static t_tools	tu;
 //TODO: afficher le nombre de char sent
 //TODO: mettre a la norme
 
@@ -50,7 +50,7 @@ void	ft_sendbin(char *str, int pid, int speed)
  */
 char	*ft_imax_to_str(int size, int count)
 {
-	t_utils	to;
+	t_tools	to;
 	
 	to.str = ft_calloc(count, sizeof(char));
 	to.y = count - 1;
@@ -69,7 +69,8 @@ void sig_handler1(int signal)
 	if (signal == SIGUSR1)
 	{
 		ft_putstr_fd("Message bien reçu\n", 1);
-		kill(getpid(), SIGQUIT);
+		
+		// kill(getpid(), SIGQUIT);
 	}
 }
 
@@ -88,7 +89,7 @@ int	main(int ac, char **av)
 	ft_sendbin(tu.str, pidserv, 400); //envoi pid client
 	free(tu.str);
 	//ft_sendbin("\n", pidserv, 0);
-	ft_sendbin(av[2], pidserv, 80); //envoi du message
+	ft_sendbin(av[2], pidserv, 140); //envoi du message
 	//ft_sendbin("\n", pidserv, 0);
 	signal(SIGUSR1, sig_handler1);
 	while(1)
