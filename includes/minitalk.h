@@ -17,10 +17,10 @@ enum	e_bool
 
 enum	e_state
 {
-	STEP_PARAMETER,
+	WAIT_PARAMETER,
 	NOT_FINISH,
 	FINISH,
-	START_RECEIVE_MSG
+	GO_RECEIVE_MSG
 };
 
 enum	e_bin
@@ -62,7 +62,7 @@ typedef struct s_tools
 	char			tmpsize[11];
 	int				ibool; //doit disparaitre FIXME:
 	enum e_bool		bool;
-	char			*str;
+//	char			*str;
 	char			*msg;
 	char			*tmp;
 	char			c;

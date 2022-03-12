@@ -6,107 +6,107 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 16:15:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:48:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
-// #include "includes/libft.h"
-
-static t_utils	tu;
+t_serv	g_ts;
 
 void sig_handler_old(int signal)
 {
 	if (signal == SIGUSR1)
-		tu.str[tu.i] = '0';
+		g_ts.str[g_ts.i] = '0';
 	if (signal == SIGUSR2)
-		tu.str[tu.i] = '1';
-	tu.i += 1;
-	if (tu.i == 8)
+		g_ts.str[g_ts.i] = '1';
+	g_ts.i += 1;
+	if (g_ts.i == 8)
 	{
-		tu.str[tu.i] = '\0';
-		tu.bin = BINARY_OK_FOR_CHAR;
+		g_ts.str[g_ts.i] = '\0';
+		g_ts.bin = BINARY_OK_FOR_CHAR;
 	}
 }
 
-// TODO: TODO: suuprimer la variable global
 // TODO: mettre a la norme
-void	receive_first_parameters(void)
+void	receive_first_parameters(t_tools *ptls)
 {	
-	tu.c = ft_btoi(tu.str);
-	tu.tmpsize[tu.y] = tu.c;
-	//ft_putchar_fd(tu.c, 1);
-	tu.bin = BINARY_WAIT;
-	tu.i = 0;
-	if(tu.y == 9 && tu.bool == FALSE)
+	ptls->c = ft_btoi(g_ts.str);
+	ptls->tmpsize[ptls->y] = ptls->c;
+	g_ts.bin = BINARY_WAIT;
+	g_ts.i = 0;
+	if(ptls->y == 9 && ptls->bool == FALSE)
 	{
-		tu.size = ft_atoi(tu.tmpsize);
+		ptls->size = ft_atoi(ptls->tmpsize);
 		 ft_putchar_fd('\n', 1);
-		 ft_putnbr_fd(tu.size, 1); // affiche la taille du message a recevoir
+		 ft_putnbr_fd(ptls->size, 1); // affiche la taille du message a recevoir
 		 ft_putchar_fd('\n', 1);
-		tu.bool = TRUE;
-		tu.y = 0;
+		ptls->bool = TRUE;
+		ptls->y = 0;
 		return;
 	}
-	if(tu.y == 9 && tu.bool == TRUE)
+	if(ptls->y == 9 && ptls->bool == TRUE)
 	{
-		tu.pid = ft_atoi(tu.tmpsize);
-		ft_putnbr_fd(tu.pid, 1); // affiche le pid client
+		ptls->pid = ft_atoi(ptls->tmpsize);
+		ft_putnbr_fd(ptls->pid, 1); // affiche le pid client
 		ft_putchar_fd('\n', 1);
-		tu.progress =  START_RECEIVE_MSG;
-		tu.y = 0;
+		ptls->progress =  GO_RECEIVE_MSG;
+		ptls->y = 0;
 		return;
 	}
-		tu.y++;
+		ptls->y++;
+}
+
+void	initialize_var(t_tools	*ptr)
+{
+	g_ts.str = ft_calloc(sizeof(char), 9);
+	g_ts.i = 0;
+	ptr->progress = WAIT_PARAMETER;
+	ptr->y = 0;
 }
 int	main()
 {
-	int		i;
-	int		size;
+	t_tools	to;
+	t_tools	*ptls;
 	
-	size = 9;
-	tu.str = ft_calloc(sizeof(char), size);
-	tu.progress = STEP_PARAMETER;
-	tu.i = 0;
-	tu.y = 0;
+	ptls = &to;
+	initialize_var(ptls);
 	printf("server PID: %d\n", getpid());
-	//ft_bzero(tu.str, size - 1);
 	signal(SIGUSR1, sig_handler_old);
 	signal(SIGUSR2, sig_handler_old);
 	while(1)
 	{
 		pause();
-		if (tu.bin == BINARY_OK_FOR_CHAR && tu.progress == STEP_PARAMETER)
-			receive_first_parameters();
-		if (tu.progress == START_RECEIVE_MSG && tu.bool == TRUE)
+		if (g_ts.bin == BINARY_OK_FOR_CHAR && ptls->progress == WAIT_PARAMETER)
+			receive_first_parameters(ptls);
+		if (ptls->progress == GO_RECEIVE_MSG && ptls->bool == TRUE)
 		{
-			tu.msg = ft_calloc(tu.size, sizeof(char));
-			tu.y = 0;
-			tu.bool = FALSE;
+			ptls->msg = ft_calloc(ptls->size, sizeof(char));
+			ptls->y = 0;
+			ptls->bool = FALSE;
 		}
-		if (tu.progress == START_RECEIVE_MSG && tu.bin == BINARY_OK_FOR_CHAR)
+		if (ptls->progress == GO_RECEIVE_MSG && g_ts.bin == BINARY_OK_FOR_CHAR)
 		{
-			//ft_putstr_fd(tu.str, 1); // affiche les binaires des chars
-			tu.c = ft_btoi(tu.str); // converti les 8 binaire dans str en int dans tu.c
-			//ft_putchar_fd(tu.c, 1); // affiche les char un a un FIXME:
-			tu.msg[tu.y] = tu.c;
-			tu.bin = BINARY_WAIT;
-			tu.i = 0;
-			tu.y++;
-			//ft_putnbr_fd(tu.y, 1);
-			if (tu.y == tu.size)
+			//ft_putstr_fd(g_ts.str, 1); // affiche les binaires des chars
+			ptls->c = ft_btoi(g_ts.str); // converti les 8 binaire dans str en int dans ptls->c
+			//ft_putchar_fd(ptls->c, 1); // affiche les char un a un FIXME:
+			ptls->msg[ptls->y] = ptls->c;
+			g_ts.bin = BINARY_WAIT;
+			g_ts.i = 0;
+			ptls->y++;
+			//ft_putnbr_fd(ptls->y, 1);
+			if (ptls->y == ptls->size)
 			{
-				tu.msg[tu.y] = '\0';
-				ft_putstr_fd(tu.msg, 1);
-				free(tu.msg);
-				tu.progress = STEP_PARAMETER;
-				tu.bin = BINARY_WAIT;
-				kill(tu.pid, SIGUSR1);
-				tu.x = 0;
-				tu.y = 0;
+				ptls->msg[ptls->y] = '\0';
+				ft_putstr_fd(ptls->msg, 1);
+				free(ptls->msg);
+				ptls->progress = WAIT_PARAMETER;
+				g_ts.bin = BINARY_WAIT;
+				kill(ptls->pid, SIGUSR1);
+				ptls->x = 0;
+				ptls->y = 0;
 			}
 		}
-		//printf("%d\n", tu.bool);
+		//printf("%d\n", ptls->bool);
 	}
 	return (0);
 }
