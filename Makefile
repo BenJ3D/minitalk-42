@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/10 15:35:20 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/12 15:22:46 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ clean:
 
 fclean: clean
 	${MAKE} fclean $(LIBFT)
-	$(RM) $(NAME) server server.out client client.out
+	$(RM) $(NAME) server server.out client client.out servertest
 
 re: fclean all
 
