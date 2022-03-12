@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 18:37:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:43:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,10 @@ void	initialize_var(t_tools	*ptr)
 	ptr->progress = WAIT_PARAMETER;
 	ptr->y = 0;
 }
-int	main()
+
+void	norm(t_tools	*ptls)
 {
-	t_tools	to;
-	t_tools	*ptls;
-	
-	ptls = &to;
-	initialize_var(ptls); 
-	printf("server PID: %d\n", getpid());
-	signal(SIGUSR1, sig_handler_old);
-	signal(SIGUSR2, sig_handler_old);
-	while(1)
-	{
-		pause();
-		if (g_ts.bin == BINARY_OK_FOR_CHAR && ptls->progress == WAIT_PARAMETER)
-			receive_first_parameters(ptls);
-		if (ptls->progress == GO_RECEIVE_MSG && ptls->bool == TRUE)
-		{
-			ptls->msg = ft_calloc(ptls->size, sizeof(char));
-			ptls->y = 0;
-			ptls->bool = FALSE;
-		}
-		if (ptls->progress == GO_RECEIVE_MSG && g_ts.bin == BINARY_OK_FOR_CHAR)
-		{
-			//ft_putstr_fd(g_ts.str, 1); // affiche les binaires des chars
+	//ft_putstr_fd(g_ts.str, 1); // affiche les binaires des chars
 			ptls->c = ft_btoi(g_ts.str); // converti les 8 binaire dans str en int dans ptls->c
 			//ft_putchar_fd(ptls->c, 1); // affiche les char un a un FIXME:
 			ptls->msg[ptls->y] = ptls->c;
@@ -105,6 +85,32 @@ int	main()
 				ptls->x = 0;
 				ptls->y = 0;
 			}
+}
+
+int	main()
+{
+	t_tools	to;
+	t_tools	*ptls;
+	
+	ptls = &to;
+	initialize_var(ptls);
+	printf("server PID: %d\n", getpid());
+	signal(SIGUSR1, sig_handler_old);
+	signal(SIGUSR2, sig_handler_old);
+	while(1)
+	{
+		pause();
+		if (g_ts.bin == BINARY_OK_FOR_CHAR && ptls->progress == WAIT_PARAMETER)
+			receive_first_parameters(ptls);
+		if (ptls->progress == GO_RECEIVE_MSG && ptls->bool == TRUE)
+		{
+			ptls->msg = ft_calloc(ptls->size, sizeof(char));
+			ptls->y = 0;
+			ptls->bool = FALSE;
+		}
+		if (ptls->progress == GO_RECEIVE_MSG && g_ts.bin == BINARY_OK_FOR_CHAR)
+		{
+			norm(ptls);
 		}
 	}
 	return (0);
