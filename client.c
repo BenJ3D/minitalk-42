@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 17:37:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:15:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void sig_handler1(int signal)
 	if (signal == SIGUSR1)
 	{
 		ft_putstr_fd("Message bien reçu\n", 1);
-		
-		// kill(getpid(), SIGQUIT);
+		kill(getpid(), SIGQUIT);
 	}
 }
 
@@ -89,7 +88,7 @@ int	main(int ac, char **av)
 	ft_sendbin(tu.str, pidserv, 400); //envoi pid client
 	free(tu.str);
 	//ft_sendbin("\n", pidserv, 0);
-	ft_sendbin(av[2], pidserv, 140); //envoi du message
+	ft_sendbin(av[2], pidserv, 80); //envoi du message
 	//ft_sendbin("\n", pidserv, 0);
 	signal(SIGUSR1, sig_handler1);
 	while(1)

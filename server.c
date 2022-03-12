@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 18:01:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:37:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main()
 	t_tools	*ptls;
 	
 	ptls = &to;
-	initialize_var(ptls);
+	initialize_var(ptls); 
 	printf("server PID: %d\n", getpid());
 	signal(SIGUSR1, sig_handler_old);
 	signal(SIGUSR2, sig_handler_old);
