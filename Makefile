@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/12 15:22:46 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/13 16:46:47 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,13 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-all : $(NAME) server client servertest
+all : $(NAME) server client
 	@chmod 700 server client
 
 server : server.c
 	gcc $(FLAGS) $(OBJS)  server.c -Llibft -lft -o server
 
-servertest : servertest.c
-	gcc $(FLAGS) $(OBJS)  servertest.c -Llibft -lft -o servertest
-	
-client : client.c
+client : client.c $(HEADER)
 	gcc $(FLAGS) $(OBJS)  client.c -Llibft -lft -o client
 
 .c.o: ${SRCS} $(HEADER)
@@ -54,7 +51,7 @@ clean:
 
 fclean: clean
 	${MAKE} fclean $(LIBFT)
-	$(RM) $(NAME) server server.out client client.out servertest
+	$(RM) $(NAME) server server.out client client.out
 
 re: fclean all
 

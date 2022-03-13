@@ -6,56 +6,70 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/12 18:43:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/13 17:49:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
 t_serv	g_ts;
 
-void sig_handler_old(int signal)
+/**
+ * @brief Filled str to form a binary string.
+ * When the 8 bits are written, the char is ready.
+ * Use ft_btoi function to convert
+ * @param signal 
+ */
+void sig_handler(int signal)
 {
 	if (signal == SIGUSR1)
-		g_ts.str[g_ts.i] = '0';
+		g_ts.str[g_ts.i] = '0'; 
 	if (signal == SIGUSR2)
 		g_ts.str[g_ts.i] = '1';
 	g_ts.i += 1;
 	if (g_ts.i == 8)
 	{
 		g_ts.str[g_ts.i] = '\0';
-		g_ts.bin = BINARY_OK_FOR_CHAR;
+		g_ts.bin = BINARY_OK_FOR_CHAR; 
 	}
 }
 
-// TODO: mettre a la norme
-void	receive_first_parameters(t_tools *ptls)
+/**
+ * @brief processes the first 20 bits received
+ * to determine the message size and the client pid.
+ * 
+ * @param pto tools struct pointer
+ */
+void	receive_first_parameters(t_tools *pto)
 {	
-	ptls->c = ft_btoi(g_ts.str);
-	ptls->tmpsize[ptls->y] = ptls->c;
+	pto->c = ft_btoi(g_ts.str);
+	pto->tmpsize[pto->y] = pto->c;
 	g_ts.bin = BINARY_WAIT;
 	g_ts.i = 0;
-	if(ptls->y == 9 && ptls->bool == FALSE)
+	if(pto->y == 9 && pto->bool == FALSE)
 	{
-		ptls->size = ft_atoi(ptls->tmpsize);
-		 ft_putchar_fd('\n', 1);
-		 ft_putnbr_fd(ptls->size, 1); // FIXME: affiche la taille du message a recevoir
-		 ft_putchar_fd('\n', 1);
-		ptls->bool = TRUE;
-		ptls->y = 0;
+		pto->size = ft_atoi(pto->tmpsize);
+		pto->bool = TRUE;
+		pto->y = 0;
 		return;
 	}
-	if(ptls->y == 9 && ptls->bool == TRUE)
+	if(pto->y == 9 && pto->bool == TRUE)
 	{
-		ptls->pid = ft_atoi(ptls->tmpsize);
-		ft_putnbr_fd(ptls->pid, 1); // affiche le pid client
-		ft_putchar_fd('\n', 1);
-		ptls->progress =  GO_RECEIVE_MSG;
-		ptls->y = 0;
+		pto->pid = ft_atoi(pto->tmpsize);
+		// ft_putnbr_fd(pto->pid, 1); // affiche le pid client
+		// ft_putchar_fd('\n', 1);
+		pto->progress =  GO_RECEIVE_MSG;
+		pto->y = 0;
+		displays_message_info(pto);
 		return;
 	}
-		ptls->y++;
+		pto->y++;
 }
 
+/**
+ * @brief 
+ * 
+ * @param ptr 
+ */
 void	initialize_var(t_tools	*ptr)
 {
 	g_ts.str = ft_calloc(sizeof(char), 9);
@@ -64,55 +78,56 @@ void	initialize_var(t_tools	*ptr)
 	ptr->y = 0;
 }
 
-void	norm(t_tools	*ptls)
+/**
+ * @brief Convert the binary string to int to fill the message variable.
+ * Once the message is complete, displays the message
+ * then free() the variable and send a signal to the client 
+ * @param pto 
+ */
+void	write_message(t_tools	*pto)
 {
-	//ft_putstr_fd(g_ts.str, 1); // affiche les binaires des chars
-			ptls->c = ft_btoi(g_ts.str); // converti les 8 binaire dans str en int dans ptls->c
-			//ft_putchar_fd(ptls->c, 1); // affiche les char un a un FIXME:
-			ptls->msg[ptls->y] = ptls->c;
-			g_ts.bin = BINARY_WAIT;
-			g_ts.i = 0;
-			ptls->y++;
-			//ft_putnbr_fd(ptls->y, 1);
-			if (ptls->y == ptls->size)
-			{
-				ptls->msg[ptls->y] = '\0';
-				ft_putstr_fd(ptls->msg, 1);
-				free(ptls->msg);
-				ptls->progress = WAIT_PARAMETER;
-				g_ts.bin = BINARY_WAIT;
-				kill(ptls->pid, SIGUSR1);
-				ptls->x = 0;
-				ptls->y = 0;
-			}
+	pto->c = ft_btoi(g_ts.str);
+	pto->msg[pto->y] = pto->c;
+	g_ts.bin = BINARY_WAIT;
+	g_ts.i = 0;
+	pto->y++;
+	if (pto->y == pto->size)
+	{
+		pto->msg[pto->y] = '\0';
+		ft_putstr_fd(pto->msg, 1);
+		free(pto->msg);
+		pto->progress = WAIT_PARAMETER;
+		g_ts.bin = BINARY_WAIT;
+		pto->y = 0;
+	}
 }
 
 int	main()
 {
 	t_tools	to;
-	t_tools	*ptls;
-	
-	ptls = &to;
-	initialize_var(ptls);
+	t_tools	*pto;
+
+	pto = &to;
+	initialize_var(pto);
 	printf("server PID: %d\n", getpid());
-	signal(SIGUSR1, sig_handler_old);
-	signal(SIGUSR2, sig_handler_old);
+	signal(SIGUSR1, sig_handler);
+	signal(SIGUSR2, sig_handler);
 	while(1)
 	{
 		pause();
-		if (g_ts.bin == BINARY_OK_FOR_CHAR && ptls->progress == WAIT_PARAMETER)
-			receive_first_parameters(ptls);
-		if (ptls->progress == GO_RECEIVE_MSG && ptls->bool == TRUE)
+		if (g_ts.bin == BINARY_OK_FOR_CHAR && pto->progress == WAIT_PARAMETER)
+			receive_first_parameters(pto);
+		if (pto->progress == GO_RECEIVE_MSG && pto->bool == TRUE)
 		{
-			ptls->msg = ft_calloc(ptls->size, sizeof(char));
-			ptls->y = 0;
-			ptls->bool = FALSE;
+			pto->msg = ft_calloc(pto->size, sizeof(char));
+			pto->y = 0;
+			pto->bool = FALSE;
 		}
-		if (ptls->progress == GO_RECEIVE_MSG && g_ts.bin == BINARY_OK_FOR_CHAR)
+		if (pto->progress == GO_RECEIVE_MSG && g_ts.bin == BINARY_OK_FOR_CHAR)
 		{
-			norm(ptls);
+			write_message(pto);
+			kill(pto->pid, SIGUSR1);
 		}
 	}
 	return (0);
 }
-
