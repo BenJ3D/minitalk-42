@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/13 17:57:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:29:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_sendbin(char *str, int pid, int speed)
 	int		i;
 	
 	i = 0;
+	printf("debug: %s\n", str);
 	while (str[i])
 	{
 		tmp = ft_atob(str[i]);
@@ -44,8 +45,8 @@ void	ft_sendbin(char *str, int pid, int speed)
 			j++;
 		}
 		i++;
+		free(tmp);
 	}
-	free(tmp);
 }
 
 /**
@@ -60,7 +61,9 @@ char	*ft_imax_to_str(int size, int count)
 {
 	t_tools	to;
 	
-	to.str = ft_calloc(count, sizeof(char));
+	to.str = ft_calloc(count + 1, sizeof(char));
+	if (!to.str)
+		return(NULL);
 	to.y = count - 1;
 	ft_memset(to.str, '0', count);
 	to.tmp = ft_itoa(size);
@@ -94,19 +97,18 @@ int	main(int ac, char **av)
 	msg_ok = FALSE;
 	pidserv = ft_atoi(av[1]);
 	ptc->str = ft_imax_to_str(ft_strlen(av[2]), 10);
+	if (!(ptc->str))
+		return (0);
 	ft_sendbin(ptc->str, pidserv, 400);
 	free(ptc->str);
 	ptc->str = ft_imax_to_str((int)getpid(), 10);
+	if (!(ptc->str))
+		return (0);
 	ft_sendbin(ptc->str, pidserv, 400);
 	free(ptc->str);
 	ft_sendbin(av[2], pidserv, SPEED);
-	free(ptc->str);
 	signal(SIGUSR1, signal_handler_client);
-	while(1)
-	{
-		pause();
-		if (msg_ok == TRUE)
-			return(0);
-	}
+	// while(1)
+	// 	pause();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/13 17:49:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/13 19:03:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	receive_first_parameters(t_tools *pto)
 	if(pto->y == 9 && pto->bool == TRUE)
 	{
 		pto->pid = ft_atoi(pto->tmpsize);
-		// ft_putnbr_fd(pto->pid, 1); // affiche le pid client
-		// ft_putchar_fd('\n', 1);
+		 ft_putnbr_fd(pto->pid, 1); // affiche le pid client
+		 ft_putchar_fd('\n', 1);
 		pto->progress =  GO_RECEIVE_MSG;
 		pto->y = 0;
 		displays_message_info(pto);
@@ -96,8 +96,10 @@ void	write_message(t_tools	*pto)
 		pto->msg[pto->y] = '\0';
 		ft_putstr_fd(pto->msg, 1);
 		free(pto->msg);
-		pto->progress = WAIT_PARAMETER;
-		g_ts.bin = BINARY_WAIT;
+		pto->progress = WAIT_PARAMETER; //TODO:
+		g_ts.bin = BINARY_WAIT;		   //TODO:
+		// pto->progress = GO_RECEIVE_MSG; //FIXME: attention debug
+		// g_ts.bin = BINARY_OK_FOR_CHAR; //FIXME:
 		pto->y = 0;
 	}
 }
@@ -124,10 +126,7 @@ int	main()
 			pto->bool = FALSE;
 		}
 		if (pto->progress == GO_RECEIVE_MSG && g_ts.bin == BINARY_OK_FOR_CHAR)
-		{
 			write_message(pto);
-			kill(pto->pid, SIGUSR1);
-		}
 	}
 	return (0);
 }

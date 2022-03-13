@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/13 17:59:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/13 18:09:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_atob(char c)
 	str = malloc(sizeof(char) * 9);
 	if(!str)
 		return (NULL);
+	str[8] = '\0';
 	base = 128;
 	i = 0;
 	while (base >= 1)
@@ -60,7 +61,6 @@ char	*ft_atob(char c)
 			break;
 		base = base / 2;
 	}
-	str[i] = '\0';
 	return(str);
 }
 
