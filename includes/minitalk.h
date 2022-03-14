@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 16:33:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/14 17:55:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/14 19:03:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,20 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <signal.h>
-#ifndef SPEED
-# define SPEED 60
-#endif
+# ifndef SPEED
+#  define SPEED 100
+# endif
 
 enum	e_bool
 {
 	FALSE,
 	TRUE
 };
-
 enum	e_state
 {
 	WAIT_PARAMETER,
 	GO_RECEIVE_MSG
 };
-
 enum	e_bin
 {
 	BINARY_WAIT,
@@ -46,7 +44,6 @@ typedef struct s_serv
 	char			*str;
 	enum e_bin		bin;
 }	t_serv;
-
 typedef struct s_tools
 {
 	int				i;
@@ -62,7 +59,8 @@ typedef struct s_tools
 	enum e_bin		bin;
 	enum e_state	progress;
 }	t_tools;
-
+t_serv		g_ts;
+enum e_bool	g_msg_ok;
 char	*ft_atob(char c);
 void	ft_sendbin(char *str, int pid, int speed);
 int		ft_btoi(char *str);
