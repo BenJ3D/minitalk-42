@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/13 16:46:47 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/14 17:49:00 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ AR = ar rcs
 RM = rm -f
 HEADER = ./includes/minitalk.h
 LIBFT = -C ./libft
+#FS = -fsanitize=address -g3
 
 FILES =	utils
 
@@ -31,10 +32,10 @@ all : $(NAME) server client
 	@chmod 700 server client
 
 server : server.c
-	gcc $(FLAGS) $(OBJS)  server.c -Llibft -lft -o server
+	gcc $(CFLAGS) $(OBJS) server.c -Llibft -lft -o server
 
 client : client.c $(HEADER)
-	gcc $(FLAGS) $(OBJS)  client.c -Llibft -lft -o client
+	gcc $(CFLAGS) $(OBJS)  client.c -Llibft -lft -o client
 
 .c.o: ${SRCS} $(HEADER)
 	gcc -c ${FLAGS} ${SRCS}

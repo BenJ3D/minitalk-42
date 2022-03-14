@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/13 18:09:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:51:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
  */
 void	displays_message_info(t_tools *pto)
 {
-	ft_putstr_fd("\n\nReceiving ", 1);
+	ft_putstr_fd("\nReceiving ", 1);
 	ft_putnbr_fd(pto->size, 1);
 	if (pto->size == 1)
 		ft_putstr_fd(" character from client pid ", 1);
 	else
 		ft_putstr_fd(" characters from client (pid ", 1);
 	ft_putnbr_fd(pto->pid, 1);
-	ft_putstr_fd(") :\n", 1);
+	ft_putstr_fd(") :\n\n", 1);
 }
 
 /**

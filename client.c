@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/13 18:29:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:13:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_sendbin(char *str, int pid, int speed)
 	int		i;
 	
 	i = 0;
-	printf("debug: %s\n", str);
 	while (str[i])
 	{
 		tmp = ft_atob(str[i]);
@@ -76,7 +75,6 @@ char	*ft_imax_to_str(int size, int count)
 
 void signal_handler_client(int signal)
 {
-	static int	y = 0;
 	if (signal == SIGUSR1)
 	{
 		ft_putstr_fd("The server has received the message\n", 1);
@@ -91,6 +89,11 @@ int	main(int ac, char **av)
 	t_tools	*ptc;
 	int		pidserv;
 	
+	if (ac != 3)
+	{
+		printf("Please enter PID SERVER and \"MESSAGE\"\n");
+		return (0);
+	}
 	printf("pid client: %d\n", getpid());
 	ptc = &tc;
 	ptc->bool = 0;
