@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 12:47:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:56:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	write_message(t_tools	*pto)
 	pto->y++;
 	if (pto->y == pto->size)
 	{
+		pto->msg[pto->y] = '\0';
 		ft_putstr_fd(pto->msg, 1);
 		free(pto->msg);
 		ft_putstr_fd("\n\n", 1);
@@ -124,7 +125,7 @@ int	main(void)
 			receive_first_parameters(pto);
 		if (pto->progress == GO_RECEIVE_MSG && pto->bool == TRUE)
 		{
-			pto->msg = ft_calloc(pto->size, sizeof(char));
+			pto->msg = ft_calloc(pto->size + 1, sizeof(char));
 			pto->y = 0;
 			pto->bool = FALSE;
 		}

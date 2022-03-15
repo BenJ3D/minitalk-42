@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 16:33:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 13:03:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:28:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdarg.h>
 # include <signal.h>
 # ifndef SPEED
-#  define SPEED 100
+#  define SPEED 150
 # endif
 
 enum	e_bool
@@ -60,7 +60,6 @@ typedef struct s_tools
 	enum e_state	progress;
 }	t_tools;
 t_serv		*g_ts;
-enum e_bool	g_msg_ok;
 char	*ft_atob(char c);
 void	ft_sendbin(char *str, int pid, int speed);
 int		ft_btoi(char *str);
