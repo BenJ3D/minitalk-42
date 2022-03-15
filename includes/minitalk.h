@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 16:33:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 13:28:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:09:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdarg.h>
 # include <signal.h>
 # ifndef SPEED
-#  define SPEED 150
+#  define SPEED 60
 # endif
 
 enum	e_bool

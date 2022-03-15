@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 13:36:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:01:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,6 @@ int	main(int ac, char **av)
 		return (0);
 	ft_sendbin(ptc->str, ptc->pid, 400);
 	free(ptc->str);
-	// ptc->str = ft_imax_to_str((int)getpid(), 10);
-	// if (!(ptc->str))
-	// 	return (0);
-	// ft_sendbin(ptc->str, ptc->pid, 400);
-	// free(ptc->str);
 	ft_sendbin(av[2], ptc->pid, SPEED);
 	return (0);
 }

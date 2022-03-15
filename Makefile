@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/15 13:52:16 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/15 14:14:55 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ HEADER = ./includes/minitalk.h
 HEADER_BONUS = ./bonus/includes/minitalk_bonus.h
 LIBFTPATH = -C ./libft
 LIBFT = ./libft/libft.a
-FS = -fsanitize=address -g3
+FS = #-fsanitize=address -g3
 
 all : ${LIBFT} server client 
 	@chmod 700 server client
@@ -50,7 +50,8 @@ clean:
 
 fclean: clean
 	${MAKE} fclean $(LIBFTPATH)
-	$(RM) $(NAME) server client ./bonus/server_bonus ./bonus/client_bonus
+	$(RM) $(NAME) server client ./bonus/server_bonus ./bonus/client_bonus 
+	rm -d -rf server.d* client.d*
 
 re: fclean all
 
