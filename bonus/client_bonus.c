@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 13:25:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:55:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,47 +72,44 @@ char	*ft_imax_to_str(int size, int count)
 
 void	signal_handler_client(int signal)
 {
-	static int	i = 0;
-
-	if (signal == SIGUSR1 && i >= 10)
+	if (signal == SIGUSR1)
 	{
 		g_msg_ok = TRUE;
-		ft_putstr_fd("The server has received the message2\n", 1);
-		kill(getpid(), SIGQUIT);
+		ft_putstr_fd("The message has been received by the server\n", 1);
 	}
 }
 
-void	initialize_client(t_tools	*ptc)
+int	send_size_and_pid(t_tools *ptc)
 {
-	ptc->bool = 0;
-	g_msg_ok = FALSE;
+	ft_sendbin(ptc->str, ptc->pid, 400);
+	free(ptc->str);
+	ptc->str = ft_imax_to_str((int)getpid(), 10);
+	if (!(ptc->str))
+		return (0);
+	ft_sendbin(ptc->str, ptc->pid, 400);
+	free(ptc->str);
+	return (1);
 }
 
 int	main(int ac, char **av)
 {
 	t_tools	tc;
 	t_tools	*ptc;
-	int		pidserv;
 
 	if (ac != 3)
 		return (printf("Please enter PID SERVER and \"MESSAGE\"\n"));
+	printf("pid client = %d\n", getpid());
 	ptc = &tc;
-	pidserv = ft_atoi(av[1]);
-	initialize_client(ptc);
+	ptc->pid = ft_atoi(av[1]);
+	g_msg_ok = FALSE;
 	ptc->str = ft_imax_to_str(ft_strlen(av[2]), 10);
 	if (!(ptc->str))
 		return (0);
-	ft_sendbin(ptc->str, pidserv, 400);
-	free(ptc->str);
-	ptc->str = ft_imax_to_str((int)getpid(), 10);
-	if (!(ptc->str))
-		return (0);
-	ft_sendbin(ptc->str, pidserv, 400);
-	free(ptc->str);
-	ft_sendbin(av[2], pidserv, SPEED);
+	send_size_and_pid(ptc);
+	ft_sendbin(av[2], ptc->pid, SPEED);
+	usleep(100);
 	signal(SIGUSR1, signal_handler_client);
 	while (g_msg_ok != TRUE)
 		pause();
-	ft_putstr_fd("The server has received the message3\n", 1);
 	return (0);
 }

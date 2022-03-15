@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 00:46:48 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 13:56:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:14:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ void	write_message(t_tools	*pto)
 		ft_putstr_fd(pto->msg, 1);
 		free(pto->msg);
 		ft_putstr_fd("\n\n", 1);
-		kill(pto->pid, SIGUSR1);
 		pto->progress = WAIT_PARAMETER;
 		g_ts->bin = BINARY_WAIT;
 		pto->y = 0;
+		usleep(500);
+		kill(pto->pid, SIGUSR1);
 	}
 }
 
