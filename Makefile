@@ -6,53 +6,51 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/15 11:47:51 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/15 13:17:14 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk.a
-
+#FIXME: attention relink sur bonus
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 HEADER = ./includes/minitalk.h
-LIBFT = -C ./libft
-FS = -fsanitize=address -g3
+HEADER_BONUS = ./bonus/includes/minitalk_bonus.h
+LIBFTPATH = -C ./libft
+LIBFT = ./libft/libft.a
+FS = #-fsanitize=address -g3
 
-FILES =	utils
-
-SRCS_DIR = ./
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-
-OBJS_DIR = ./
-OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
-
-all : $(NAME) server client
+all : ${LIBFT} server client 
 	@chmod 700 server client
 
-server : server.c
-	gcc $(CFLAGS) $(FS) $(OBJS) server.c -Llibft -lft -o server
 
-client : client.c $(HEADER)
-	gcc $(CFLAGS) $(FS) $(OBJS)  client.c -Llibft -lft -o client
+server : server.c utils.c $(HEADER)
+	gcc $(CFLAGS) $(FS) utils.c server.c -Llibft -lft -o server
 
-.c.o: ${SRCS} $(HEADER)
-	gcc -c ${FLAGS} ${SRCS}
+client : client.c utils.c $(HEADER)
+	gcc $(CFLAGS) $(FS) utils.c client.c -Llibft -lft -o client
 
-$(NAME) : $(OBJS)
-	${MAKE} $(LIBFT)
-	${MAKE} bonus $(LIBFT)
-	cp libft/libft.a $(NAME)
-	$(AR) $@ $^ 
+server_bonus : ./bonus/server_bonus.c utils.c $(HEADER_BONUS)
+	gcc $(CFLAGS) $(FS) ./bonus/utils_bonus.c ./bonus/server_bonus.c -Llibft -lft -o ./bonus/server_bonus
+
+client_bonus : ./bonus/client_bonus.c utils.c $(HEADER_BONUS)
+	gcc $(CFLAGS) $(FS) ./bonus/utils_bonus.c ./bonus/client_bonus.c -Llibft -lft -o ./bonus/client_bonus
+
+${LIBFT}: 
+	make -C ./libft
+	make bonus -C ./libft
+
+bonus: ${LIBFT} $(HEADER_BONUS) server_bonus client_bonus 
+	@chmod 700 ./bonus/server_bonus ./bonus/client_bonus
 
 clean:
-	${MAKE} clean $(LIBFT)
-	$(RM) $(OBJS)
+	${MAKE} clean $(LIBFTPATH)
+	$(RM)
 
 fclean: clean
-	${MAKE} fclean $(LIBFT)
-	$(RM) $(NAME) server server.out client client.out
+	${MAKE} fclean $(LIBFTPATH)
+	$(RM) $(NAME) server client ./bonus/server_bonus ./bonus/client_bonus
 
 re: fclean all
 

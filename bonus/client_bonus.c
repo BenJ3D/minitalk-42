@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 13:19:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:47:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minitalk.h"
+#include "includes/minitalk_bonus.h"
 
 /**
  * @brief send message in binary
@@ -70,6 +70,18 @@ char	*ft_imax_to_str(int size, int count)
 	return (to.str);
 }
 
+void	signal_handler_client(int signal)
+{
+	static int	i = 0;
+
+	if (signal == SIGUSR1 && i >= 10)
+	{
+		g_msg_ok = TRUE;
+		ft_putstr_fd("The server has received the message2\n", 1);
+		kill(getpid(), SIGQUIT);
+	}
+}
+
 void	initialize_client(t_tools	*ptc)
 {
 	ptc->bool = 0;
@@ -98,5 +110,9 @@ int	main(int ac, char **av)
 	ft_sendbin(ptc->str, pidserv, 400);
 	free(ptc->str);
 	ft_sendbin(av[2], pidserv, SPEED);
+	signal(SIGUSR1, signal_handler_client);
+	while (g_msg_ok != TRUE)
+		pause();
+	ft_putstr_fd("The server has received the message3\n", 1);
 	return (0);
 }
