@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:44:26 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/14 17:51:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:05:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,31 @@ void	displays_message_info(t_tools *pto)
  */
 char	*ft_atob(char c)
 {
-	int	i;
-	int	base;
-	char *str;
+	int		i;
+	int		base;
+	char	*str;
 
 	str = malloc(sizeof(char) * 9);
-	if(!str)
+	if (!str)
 		return (NULL);
 	str[8] = '\0';
 	base = 128;
 	i = 0;
 	while (base >= 1)
 	{
-		if((c / base) == 1)
+		if ((c / base) == 1)
 		{
 			str[i] = '1';
 			c = c - base;
 		}
-		else 
+		else
 			str[i] = '0';
-		i++;	
+		i++;
 		if (base == 1)
-			break;
+			break ;
 		base = base / 2;
 	}
-	return(str);
+	return (str);
 }
 
 /**

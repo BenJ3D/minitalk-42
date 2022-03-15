@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 16:33:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/14 19:03:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 11:59:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_tools
 	enum e_bin		bin;
 	enum e_state	progress;
 }	t_tools;
-t_serv		g_ts;
+t_serv		*g_ts;
 enum e_bool	g_msg_ok;
 char	*ft_atob(char c);
 void	ft_sendbin(char *str, int pid, int speed);
