@@ -6,11 +6,10 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/15 17:05:09 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/03/15 18:05:03 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#FIXME: attention relink sur bonus
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
@@ -32,17 +31,17 @@ client : client.c utils.c $(HEADER)
 	gcc $(CFLAGS) $(FS) utils.c client.c -Llibft -lft -o client
 
 server_bonus : ./bonus/server_bonus.c utils.c $(HEADER_BONUS)
-	gcc $(CFLAGS) $(FS) ./bonus/utils_bonus.c ./bonus/server_bonus.c -Llibft -lft -o ./bonus/server_bonus
+	gcc $(CFLAGS) $(FS) ./bonus/utils_bonus.c ./bonus/server_bonus.c -Llibft -lft -o ./bonus/server
 
 client_bonus : ./bonus/client_bonus.c utils.c $(HEADER_BONUS)
-	gcc $(CFLAGS) $(FS) ./bonus/utils_bonus.c ./bonus/client_bonus.c -Llibft -lft -o ./bonus/client_bonus
+	gcc $(CFLAGS) $(FS) ./bonus/utils_bonus.c ./bonus/client_bonus.c -Llibft -lft -o ./bonus/client
 
 ${LIBFT}: 
 	make -C ./libft
 	make bonus -C ./libft
 
 bonus: ${LIBFT} $(HEADER_BONUS) server_bonus client_bonus 
-	@chmod 700 ./bonus/server_bonus ./bonus/client_bonus
+	@chmod 700 ./bonus/server ./bonus/client
 
 clean:
 	${MAKE} clean $(LIBFTPATH)
@@ -50,8 +49,8 @@ clean:
 
 fclean: clean
 	${MAKE} fclean $(LIBFTPATH)
-	$(RM) $(NAME) server client ./bonus/server_bonus ./bonus/client_bonus 
-	rm -d -rf server.d* client.d*
+	$(RM) $(NAME) server client ./bonus/server ./bonus/client
+	rm -d -rf server.d* client.d* .vscode
 
 re: fclean all
 

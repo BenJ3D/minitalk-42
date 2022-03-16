@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 16:33:47 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 14:09:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:59:40 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 # define MINITALK_H
 
 # include "../libft/libft.h"
-# include <string.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdarg.h>
 # include <signal.h>
 # ifndef SPEED
-#  define SPEED 60
+#  define SPEED 80
 # endif
 
 enum	e_bool
@@ -36,7 +32,7 @@ enum	e_state
 enum	e_bin
 {
 	BINARY_WAIT,
-	BINARY_OK_FOR_CHAR
+	BIN_OK_FOR_CHAR
 };
 typedef struct s_serv
 {
@@ -59,7 +55,7 @@ typedef struct s_tools
 	enum e_bin		bin;
 	enum e_state	progress;
 }	t_tools;
-t_serv		*g_ts;
+t_serv		*g_serv;
 char	*ft_atob(char c);
 void	ft_sendbin(char *str, int pid, int speed);
 int		ft_btoi(char *str);

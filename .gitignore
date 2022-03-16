@@ -34,6 +34,9 @@ client_bonus
 *.so.*
 *.dylib
 
+# Vscode
+.vscode
+
 # Executables
 *.exe
 *.out

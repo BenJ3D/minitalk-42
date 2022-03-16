@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:05:16 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/03/15 16:55:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:42:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 		return (printf("Please enter PID SERVER and \"MESSAGE\"\n"));
-	printf("pid client = %d\n", getpid());
 	ptc = &tc;
 	ptc->pid = ft_atoi(av[1]);
 	g_msg_ok = FALSE;
