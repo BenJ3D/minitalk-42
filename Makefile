@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 00:44:59 by bducrocq          #+#    #+#              #
-#    Updated: 2022/03/15 18:05:03 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/06/03 11:26:28 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,8 @@ fclean: clean
 re: fclean all
 
 git:
-	git add .
-	git commit -m "$m"
-	git push
+	@git add .
+	@printf "Message of the commit: " && read msg && git commit -m "$$msg"
+	@git push
 
 .PHONY: all clean fclean re
